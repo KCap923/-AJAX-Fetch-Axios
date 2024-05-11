@@ -13,6 +13,9 @@ const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 // Step 0: Store your API key here for reference and easy access.
 const API_KEY = "API_KEY";
 
+
+
+
 axios(" https://api.thecatapi.com/v1/images/search")
 .then((x)=> {
   console.log(x);
@@ -101,14 +104,20 @@ async function initialLoad() {
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
-breedSelect.addEventListener
+breedSelect.addEventListener("change", async (evt) => {
+
+  if (evt,target,value === "") {
+Carousel.clear();
+  }
+  
+let apiData = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=${API_KEY}`);
+let jsonData = await apiData.json();
+console.log(typeof jsonData);
+let carouselInnerEl = document.getElementById("carouselInner");
+let infoTitle = document.createElement
 
 
-
-
-
-
-
+});
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
