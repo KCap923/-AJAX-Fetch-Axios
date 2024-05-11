@@ -11,16 +11,47 @@ const progressBar = document.getElementById("progressBar");
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-const API_KEY = "live_Nh8JXYkb6eFzfOxJQ0Q5GRK8F1Hz8Q5Zyzm3HLnCSUVwK2BfQrsRxJf006UfE87A";
+const API_KEY = "API_KEY";
 
 axios(" https://api.thecatapi.com/v1/images/search")
-.then((x)=>{
+.then((x)=> {
   console.log(x);
+  x.json().then((j) => {
+    console.log(j);
+  });
 
 })
 .catch((err) => {
   console.log(err);
 });
+
+async function myFunction() {
+let apiData = await axios(
+  `https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=${API_KEY}`
+
+);
+console.log(apiData.data);
+}
+
+myFunction().then((x) => {
+  console.log(x);
+});
+
+// ************************************************************************************************************************
+async function myFunction2() {
+  let apiData = await fetch(
+    `https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=${API_KEY}`
+  
+  );
+  let jsonData = await apiData.json();
+  console.log(jsonData);
+  }
+  
+  myFunction2().then((x) => {
+    console.log(x);
+  });
+  
+
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
@@ -30,6 +61,30 @@ axios(" https://api.thecatapi.com/v1/images/search")
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
+
+async function initialLoad() {
+  let jsonData = await apiData.json();
+
+  let defaultOption = document.createElement("option");
+  defaultOption.value = "", 
+  defaultOption.textContent = "Select A Breed";
+
+  breedSelect.appendChild(defaultOption);
+
+  jsonData.forEach((data) => {
+    let option = document.createElement(option);
+
+    option.value = data.id;
+
+    option.textContent = data.name;
+
+    breedSelect.appendChild(option);
+  });
+
+  return "initailLoad completed";
+
+}
+
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -45,6 +100,15 @@ axios(" https://api.thecatapi.com/v1/images/search")
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
+
+breedSelect.addEventListener
+
+
+
+
+
+
+
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
